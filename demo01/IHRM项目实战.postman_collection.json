@@ -1,0 +1,1017 @@
+{
+	"info": {
+		"_postman_id": "3fc3d133-082d-42b0-80e5-25da294a1ca1",
+		"name": "IHRM项目实战",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登陆模块",
+			"item": [
+				{
+					"name": "登陆成功",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(10000);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"操作成功！\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户名不存在",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是用户名不存在，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是用户名不存在，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是用户名不存在，所以message的值预期应该是",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"用户名或密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13900000002\",\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码错误",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是密码错误，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是密码错误，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是密码错误，所以message的值预期应该是用户名或密码错误",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"用户名或密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\"password\":\"1234567\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "无参",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是无参，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是无参，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(99999);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是无参，所以message的值预期应该是用户名或密码错误",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"抱歉，系统繁忙，请稍后重试！\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "用户名为空",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是用户名为空，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是用户名为空，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是用户名为空，所以message的值预期应该是用户名或密码错误",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"用户名或密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"\",\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "密码为空",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是密码为空，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是密码为空，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是密码为空，所以message的值预期应该是用户名或密码错误",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"用户名或密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\"password\":\"\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数测试-缺少mobile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是缺少mobile，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是缺少mobile，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是缺少mobile，所以message的值预期应该是用户名或密码错误",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"用户名或密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数测试-缺少password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是缺少password，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是缺少password，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是缺少password，所以message的值预期应该是用户名或密码错误",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"用户名或密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数测试-多参",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是多参，所以success的值预期应该是true",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是多参，所以code的值预期应该是10000",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(10000);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是多参，所以message的值预期应该操作成功",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"操作成功！\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\"password\":\"123456\",\"duoyude\":\"123\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "参数测试-错误参数",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "86f3a7b3-4299-4461-9947-cab89e80437f",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"// 由于测试的是错误参数，所以success的值预期应该是false",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"// 由于测试的是错误参数，所以code的值预期应该是20001",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(20001);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"// 由于测试的是错误参数，所以message的值预期应该用户名或密码错误",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"用户名或密码错误\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"moble\":\"13800000002\",\"password\":\"123456\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "员工模块",
+			"item": [
+				{
+					"name": "登陆",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bb01f70c-99d6-4985-bb9d-db01c65d0792",
+								"exec": [
+									"// 获取登陆接口返回的json数据",
+									"var jsonData = pm.response.json();",
+									"// 获取json数据中的令牌，",
+									"var token = jsonData.data",
+									"// 并拼接成Bearer xxx-xxx",
+									"var b_token = \"Bearer \" + token ",
+									"// 然后保存到环境变量",
+									"pm.environment.set(\"token\", b_token);",
+									"// 注意：要先选择环境才能保存"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"mobile\":\"13800000002\",\"password\":\"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加员工",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9247b546-22e2-4b8e-90e3-2d0310840228",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(10000);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"操作成功！\");",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"// 保存员工ID到环境变量",
+									"// 获取添加员工接口返回的json数据",
+									"// 注意：如果添加员工的令牌失效，或者报出了系统繁忙等失败的错误",
+									"// 那么员工ID也不会保存成功",
+									"var jsonData = pm.response.json()",
+									"// 保存json数据当中的id到环境变量",
+									"// 注意要先选择环境",
+									"pm.environment.set(\"emp_id\", jsonData.data.id)",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"海豹superstart00795270xxx04\",\n    \"mobile\": \"15689014360\",\n    \"timeOfEntry\": \"2020-02-01\",\n    \"formOfEmployment\": 1,\n    \"departmentName\": \"酱油2部\",\n    \"departmentId\": \"1205026005332635648\",\n    \"correctionTime\": \"2020-02-03T16:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "查询员工",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8032561f-5f42-4d07-948a-fcf679b80059",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(10000);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"操作成功！\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/sys/user/{{emp_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{emp_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改员工",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "396f8b44-e3e9-4348-a5eb-d8482d6dff53",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(10000);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"操作成功！\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"new-tom\"}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sys/user/{{emp_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{emp_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除员工",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3cba605d-da2f-408a-a148-19cd80bed1f3",
+								"exec": [
+									"// 断言响应状态码",
+									"// 断言中的预期结果是从需求和接口文档以及接口测试用例中获取",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// 断言返回的json数据当中success的值",
+									"pm.test(\"断言返回的json数据当中success的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"});",
+									"",
+									"// 断言返回的json数据当中code的值",
+									"pm.test(\"断言返回的json数据当中code的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.code).to.eql(10000);",
+									"});",
+									"",
+									"// 断言返回的json数据当中message的值",
+									"pm.test(\"断言返回的json数据当中message的值\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"操作成功！\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/sys/user/{{emp_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sys",
+								"user",
+								"{{emp_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
